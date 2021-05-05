@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
       this.recuerdame = true;
     }
   }
+
   login( form:NgForm ){
     if( form.invalid ){ return; }
     else{
@@ -35,27 +36,23 @@ export class LoginComponent implements OnInit {
       });
       Swal.showLoading();
 
-      this.auth.login( this.usuario )
-        .subscribe( resp => {
-          //login valido
-          console.log(resp);
-          Swal.close();
-          
-          //recoradar contraseña
-          if(this.recuerdame){
-            localStorage.setItem('email', this.usuario.email);
-          }
-
-          this.router.navigateByUrl('/home'); 
-
-        }, (err)=> {
-          console.log(err.error.error.message);
+      let estaLogueado = this.auth.login( this.usuario )
+      if(estaLogueado != false){
+        Swal.close();
+        //recoradar contraseña
+        if(this.recuerdame){
+          localStorage.setItem('email', this.usuario.email);
+        }
+        this.router.navigateByUrl('/home');
+        console.log("hola");
+      }else{
+        console.log("Error al autenticar");
           Swal.fire({
             icon: 'error',
             title: 'Error al autenticar',
-            text: 'err.error.error.message'
+            text: 'Error al autenticar'
           });
-        });
+      }     
     }
   }
 

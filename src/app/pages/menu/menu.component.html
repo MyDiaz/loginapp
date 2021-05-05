@@ -1,0 +1,15 @@
+<div *ngFor="let usuario of usuarios" class="card mt-5" style="width: 18rem;">
+    <div class="card-header">
+        <button (click)="verUsuario(usuario.id)" type="button" class="ButtonLote btn mr-2 mb-2"> 
+        {{usuario.name}} {{usuario.username}}
+    </button>
+
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{usuario.email}}</li>
+        <li class="list-group-item">{{usuario.address | json}}</li>
+        <li class="list-group-item">{{usuario.phone}}</li>
+        <li class="list-group-item">{{usuario.website}}</li>
+        <li class="list-group-item">{{usuario.company | json}}</li>
+    </ul>
+</div>
